@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+</head>
+<body>
+  <h2>To-Do List</h2>
+  
+  <input type="text" id="taskInput" placeholder="Enter a task">
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function addTask() {
+      let input = document.getElementById("taskInput");
+      let taskText = input.value.trim();
+
+      if (taskText === "") {
+        alert("Task cannot be empty!");
+        return;
+      }
+
+      let li = document.createElement("li");
+      li.textContent = taskText;
+
+      li.onclick = function () {
+        li.style.textDecoration = 
+          li.style.textDecoration === "line-through" ? "none" : "line-through";
+      };
+
+      let delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.onclick = function () {
+        li.remove();
+      };
+
+      li.appendChild(document.createTextNode(" "));
+      li.appendChild(delBtn);
+
+      document.getElementById("taskList").appendChild(li);
+
+      input.value = "";
+      input.focus();
+    }
+  </script>
+</body>
+</html>
